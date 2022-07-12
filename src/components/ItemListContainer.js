@@ -1,16 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import ItemCount from './ItemCount';
 import ItemList from './ItemList';
 import products from "../products.json"
+import item from './Item';
 const ItemListContainer = ({greeting}) => {
   function onAddCallback(n){
     alert(`agregados ${n} productos`);
   }
-
 const [list, setList] = useState([])
-useEffect(()=>{
-  setTimeout(setList, 3000, false);
-}, []);
+new Promise ((resolve, reject)=>{
+  if(item){
+    resolve(setTimeout(setList, 2000, false));
+  }else{
+    reject(console.log("error"));
+  }
+})
   return (
     <div>
       {list ?(
