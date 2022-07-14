@@ -1,30 +1,28 @@
-import React, {useState} from 'react';
-import ItemCount from './ItemCount';
+import React, { useState } from 'react';
 import ItemList from './ItemList';
 import products from "../products.json"
-import item from './Item';
-const ItemListContainer = ({greeting}) => {
-  function onAddCallback(n){
-    alert(`agregados ${n} productos`);
-  }
-const [list, setList] = useState([])
-new Promise ((resolve, reject)=>{
-  if(item){
-    resolve(setTimeout(setList, 2000, false));
-  }else{
-    reject(console.log("error"));
-  }
-})
+import Item from './Item';
+
+const ItemListContainer = ({ greeting }) => {
+  const [list, setList] = useState([])
+  new Promise((resolve, reject) => {
+    if (Item) {
+      resolve(setTimeout(() => { setList(false)}
+        , 2000));
+    } else {
+      reject(console.log("error"));
+    }
+  })
+
   return (
     <div>
-      {list ?(
+      {list ? (
         <h1>Loading..</h1>
       ) : (
-       <>
-      {greeting}
-      <ItemCount stock={5} initial={1} onAdd={(onAddCallback)} />
-      <ItemList items={products}/>
-      </> 
+        <>
+          {greeting}
+          <Item items={products} />
+        </>
       )}
     </div>
   )

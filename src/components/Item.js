@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from "react";
+import ItemDetail from "./ItemDetail";
 
-const item = ({ id, title, description, price, PictureUrl}) => {
+const Item = ({ items }) => {
+  const [listDetails, setlistDetails] = useState(true);
+  setTimeout(() => {
+    setlistDetails(false);
+  }, 2000);
   return (
-    <div>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <p>${price}</p>
-        <img src={PictureUrl} alt={title}></img>
-        <a href={"/" + id}>Ver detalle</a>
+    <div className="display-flex row">
+      {items.length ? (
+        items.map((el) => (
+          <div className="p-3 m-1 h3 card w-25 align-item-center" key={el.id}>
+            {el.title}
+            <hr></hr>
+            {listDetails ? (
+              <h3>CARGANDO Detalles...</h3>
+            ) : (
+              <ItemDetail
+                imagen={el.image}
+                descr={el.description}
+                price={el.price}
+              />
+            )}
+          </div>
+        ))
+      ) : (
+        <h2>No Hay Resultados</h2>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default item
+export default Item;
