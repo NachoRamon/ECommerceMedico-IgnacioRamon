@@ -1,13 +1,16 @@
 import React from "react";
-
-const ItemDetailContainer = ({ imagen, descr, price }) => {
+import { Link } from "react-router-dom"
+const ItemDetail = ({ id, name, images }) => {
   return (
     <div>
-      <img className="w-25" src={imagen}></img>
-      <p>{descr}</p>
-      <p>${price}</p>
+      <img src={images} alt={name}/>
+      
+      <div>
+        <Link to={"../products/" + id} > {name}</Link>
+      </div>
     </div>
+    
   );
 };
 
-export default ItemDetailContainer;
+export default ItemDetail;
