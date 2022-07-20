@@ -6,7 +6,7 @@ const Item = ({ items }) => {
     <div className="display-flex row">
       {items.length ? (
         items.map((el) => (
-          <ItemDetail key={el.id} name={el.title} image={el.images} id={el.id}/>)
+          <ItemDetail key={el.id} name={el.title} images={el.images} id={el.id}/>)
           )
       ) : (
         <h2>No Hay Resultados</h2>
