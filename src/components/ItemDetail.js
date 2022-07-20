@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom"
 const ItemDetail = ({ id, name, images }) => {
   return (
@@ -9,6 +9,7 @@ const ItemDetail = ({ id, name, images }) => {
         <Link to={"../products/" + id} > {name}</Link>
       </div>
     </div>
+    
     
   );
 };

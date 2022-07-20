@@ -21,7 +21,7 @@ const FilterCategory = () => {
 
   return (
     <div>{data.length ? (
-        data.map((el) => <ItemDetail key={el.id} name={el.title} image={el.images[0]} id={el.id} />)
+        data.map((el) => <ItemDetail key={el.id} name={el.title} image={el.images} id={el.id} />)
         ) : (
             <h3>No Hay Resultados</h3>
 )}
