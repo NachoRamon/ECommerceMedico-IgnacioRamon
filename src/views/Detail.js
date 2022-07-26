@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import ItemCount from '../components/ItemCount';
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../components/CartContext';
 const Detail = () => {
   let params = useParams();
   const [data, setData] = useState();
   const [err, setErr] = useState("")
   const [cart , setCart] = useState(true)
+  const {addItem}=useCartContext()
 
 useEffect(() => {
     fetch("https://dummyjson.com/products/" + params.id)
@@ -34,6 +36,7 @@ useEffect(() => {
         {cart ? (
     <ItemCount
     stock={5} initial={1} onAdd={(n) => {alert( `agragados ${n} productos`);
+    addItem(data);
     setCart(false)
   }}
   />

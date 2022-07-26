@@ -8,6 +8,8 @@ import Contacto from './views/Contacto';
 import ItemListContainer from './components/ItemListContainer';
 import Detail from './views/Detail';
 import FilterCategory from './views/FilterCategory';
+import Cart from './components/cart';
+import { CartContextProvider } from './components/CartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +21,7 @@ root.render(
         <Route path="products/categories/:id" element={<FilterCategory />}></Route>
         <Route path="Categorias" element={<Categorias />} />
         <Route path="Contacto" element={<Contacto />}/>
+        <Route path="/cart" element={<Cart />} />
       </Route>
     </Routes>
   </BrowserRouter>
