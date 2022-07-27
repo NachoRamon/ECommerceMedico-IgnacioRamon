@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import ItemCount from '../components/ItemCount';
 import { Link } from 'react-router-dom';
@@ -7,44 +7,52 @@ const Detail = () => {
   let params = useParams();
   const [data, setData] = useState();
   const [err, setErr] = useState("")
-  const [cart , setCart] = useState(true)
-  const {addItem}=useCartContext()
+  const [cart, setCart] = useState(true)
+  const { addItem } = useCartContext();
 
-useEffect(() => {
+  useEffect(() => {
     fetch("https://dummyjson.com/products/" + params.id)
-    .then((res) => res.json())
-    .then((json) => {
+      .then((res) => res.json())
+      .then((json) => {
         setData(json);
-    })
-    .catch(() => setErr(err));
-}, [params.id]);
-  
-    return (
-    <div>
-        {data && (
-                <div> 
-                    <img src={data.images} alt={data.name} />
-                    <div>
-                        <p>{data.title}</p>
-                        <p>${data.price}</p>
-                        <p>{data.brand}</p>
-                        <p>{data.description}</p>
-                    </div>
-                </div>
-            )
-        }
-        {cart ? (
-    <ItemCount
-    stock={5} initial={1} onAdd={(n) => {alert( `agragados ${n} productos`);
-    addItem(data);
+      })
+      .catch(() => setErr(err));
+  }, [params.id]);
+
+  const onAdd = (c) => {
+    alert(`agregados ${c} productos`)
+    addItem({
+      id: data.id,
+      title: data.title,
+      price: data.price,
+      quantity: c,
+    });
     setCart(false)
-  }}
-  />
-  ) : (
-    <Link to="/cart">
-      Ver el carrito
-    </Link>
-  )}
+  }
+
+  return (
+    <div>
+      {data && (
+        <div>
+          <img src={data.images} alt={data.name} />
+          <div>
+            <p>{data.title}</p>
+            <p>${data.price}</p>
+            <p>{data.brand}</p>
+            <p>{data.description}</p>
+          </div>
+        </div>
+      )
+      }
+      {cart ? (
+        <ItemCount
+          stock={5} initial={1} onAdd={(c) => onAdd(c)}
+        />
+      ) : (
+        <Link to="/cart">
+          Ver el carrito
+        </Link>
+      )}
     </div>
   )
 }

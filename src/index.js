@@ -8,8 +8,7 @@ import Contacto from './views/Contacto';
 import ItemListContainer from './components/ItemListContainer';
 import Detail from './views/Detail';
 import FilterCategory from './views/FilterCategory';
-import Cart from './components/cart';
-import { CartContextProvider } from './components/CartContext';
+import Cart from './views/cart';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
