@@ -33,13 +33,24 @@ export const CartContextProvider = ({ children }) => {
             setCart([])
         }
 
+        const totalItems = () =>{
+            if (cart.length===1) {
+                return cart[0].quantity
+            }{
+                const _items = cart.map((cart) => cart.quantity).reduce((a,b) => (a+b))
+                return _items
+            }
+        }
         return (
             <CartContext.Provider 
             value={{cart,
                 addItem,
                 isInCart,
                 deleteItem,
-                clearAll}}
+                clearAll,
+                totalItems,
+
+            }}
                 >
                 {children}
             </CartContext.Provider>

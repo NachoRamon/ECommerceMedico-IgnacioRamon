@@ -34,7 +34,7 @@ const Detail = () => {
     <div>
       {data && (
         <div>
-          <img src={data.images} alt={data.name} />
+          <img src={data.images[0]} alt={data.name} />
           <div>
             <p>{data.title}</p>
             <p>${data.price}</p>
