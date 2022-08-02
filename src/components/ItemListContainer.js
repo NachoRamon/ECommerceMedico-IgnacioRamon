@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { getProducts } from '../firebase';
 import Item from './Item';
 const ItemListContainer = () => {
-  const [listLoading, setlistLoading] = useState(true);
   const [results, setResults] = useState([]);
   const [err, setErr] = useState("");
+
+  useEffect(() =>{
+    getProducts().then((snapshot) =>{
+     setResults(snapshot.docs.map((doc) => {
+        return {
+          id:doc.id, ...doc.data(),
+        }
+      }));
+    }).catch(() => setErr("Ocurrio un error"));
+  }, []);
   
-  useEffect(() => {
+  /* useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((json) => {
@@ -19,7 +29,7 @@ const ItemListContainer = () => {
   if (listLoading) {
     return <span>Loading...</span>; 
 
-  }
+  } */
   return (
     <div className="display-flex row">
       {err ? <span>{err}</span> : <Item items={results} />}

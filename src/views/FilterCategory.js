@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import ItemDetail from '../components/ItemDetail';
+import { getProductsByCategoryId } from "../firebase";
 
 const FilterCategory = () => {
   let params = useParams();
@@ -8,13 +9,18 @@ const FilterCategory = () => {
   const [err, setErr] = useState("");
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/category/" + params.id)
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json.products);
-
-        console.log(json.products)
-      })
+    getProductsByCategoryId(params.id).then((category) => {
+      setData(
+        category.docs.map((documento) => {
+          
+        console.log(documento.data());
+          return {
+            id: documento.id,
+            ...documento.data(),
+          };
+        })
+      );
+    })
       .catch(() => setErr(err));
   }, [params.id]);
 

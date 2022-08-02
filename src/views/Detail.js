@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import ItemCount from '../components/ItemCount';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../components/CartContext';
+import {getProductById} from "../firebase";
+
 const Detail = () => {
   let params = useParams();
   const [data, setData] = useState();
@@ -11,11 +13,9 @@ const Detail = () => {
   const { addItem } = useCartContext();
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/" + params.id)
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-      })
+    getProductById(params.id).then((product) => {
+      setData({id:params.id,...product})
+    })
       .catch(() => setErr(err));
   }, [params.id]);
 

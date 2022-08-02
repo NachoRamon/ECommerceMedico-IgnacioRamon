@@ -10,6 +10,7 @@ import Detail from './views/Detail';
 import FilterCategory from './views/FilterCategory';
 import Cart from './views/cart';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
